@@ -1,10 +1,50 @@
-# Getting Started with Create React App
+## Features and User Stories
+Metronome F1: 15 hours
+	US1- (5) Metronome UI with flashing colors		
+	US2- (1) Metronome Beats Button			
+	US3- (1) Metronome BPM button			
+	US4- (1) Metronome Timer Button			
+	US5- (1) Metronome Play, Stop, Pause		
+	US6- (5) Metronome Sound Effects			
+	US7- (1) Testing					
+Profile F2:  14 hours
+	US8-  (1) Show user name
+	US9-  (2) Streak
+	US10- (2) Minutes Practiced
+	US11- (3) Share button
+	US12- (1) Other Statistics (last time played, etc)
+	US13- (5) Calendar with color for days played
+Practice Log F3: 7 hours
+	US14- (5) Practice Log
+	US15- (2) Export to CSV
+Piece Backpack F4: 6 hours
+	US16- (2)- Save Piece and beats
+	US17- (4)- Piece list and last played
+Settings F5: 10 hours
+	US18- (2)- Theme
+	US19- (2)- Change username/password
+	US20- (1)- Delete History
+	US21- (1)- Clear practice log
+	US22- (2)- Rate this app
+	US23- (1)- App Version Strings, links
+	US24- (1)- Logout
+IMSLP Integration F6: 4 hours
+	US25- (2)- Webview Integration
+	US26- (1)- Piece search
+	US27- (1)- History
+YouTube Integration F7: 4 hours
+	US28- (2)- Webview Integration
+	US29- (1)- YouTube piece search
+	US30- (1)- History
+Onboarding Page F8: 4 hours
+	US31- (2)- Registration
+	US32- (2)- Login
+General F9: 3 hours
+	US3- (3) Menu and Menu Button
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Sprint Progress
+### Sprint 1 (6/6/22 - 6/13/22):
 
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
@@ -68,3 +108,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
