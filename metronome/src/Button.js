@@ -18,7 +18,6 @@ Button.defaultProps = {
 
 Button.propTypes = {
     className: PropTypes.string,
-    display: PropTypes.string,
     onClick: PropTypes.func,
 }
 

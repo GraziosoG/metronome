@@ -14,30 +14,33 @@
 }
 
 .upArrow {
-  border-color: red;
+  border: 2px solid red;
   cursor: pointer;
   margin-right: 10px;
   text-align: center;
-  font-size: 20px;
+  font-size: 30px;
+  padding: 0px;
 }
 
 .downArrow {
-  border-color: green;
+  border: 2px solid green;
   cursor: pointer;
   margin-left: 10px;
   text-align: center;
-  font-size: 20px;
+  font-size: 30px;
+  padding: 0px;
 }
 
-.timer {
+.timerRow {
   font-size: 30px;
   font-family: QuartzMS;
 }
 
 .timerBtn {
-  border-color: grey;
+  border: 2px solid gray;
   cursor: pointer;
   margin-left: 10px;
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
+  padding: 2px;
 }
