@@ -1,12 +1,12 @@
 import './Home.css';
 import Button from './Button';
 import React, {useEffect, useState} from 'react';
-import { BiMenu, BiUpArrow, BiDownArrow } from 'react-icons/bi';
+import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
 import { GrPlay, GrPause, GrStop } from 'react-icons/gr';
-
+import Metronome from '../src/components/metronome-component';
 
 function Home() {
-  const [bpmValue, setBpmValue] = useState(100);
+  const [bpmValue, setBpmValue] = useState(120);
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
 
@@ -32,6 +32,10 @@ function Home() {
     setBpmValue(bpmValue - 1);
   }
 
+  const onStartMetronomeClicked = () => {
+    setTimerOn(true);
+  }
+
   const upArrow = <BiUpArrow/>;
   const downArrow = <BiDownArrow/>;
   const playBtn = <GrPlay/>;
@@ -55,20 +59,40 @@ function Home() {
         <span>{("0" + Math.floor(time % 60)).slice(-2)}</span>
       </div>
 
-      <div className='timerControlRow'>
-        {!timerOn && time === 0 && (
-          <Button className='timerBtn' onClick={() => setTimerOn(true)} display={playBtn}/>
+      <Metronome
+        tempo={bpmValue}
+        render={({
+          tempo,
+          beatsPerMeasure,
+          playing,
+          beat,
+          subdivision,
+          onPlay,
+          onBpmChange,
+        }) => (
+          <div>
+            <main>
+              {beat}/{beatsPerMeasure}
+              <div className='timerControlRow'>
+                {!timerOn && time === 0 && (
+                  <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); onPlay(); }} display={playBtn}/>
+                )}
+                {timerOn && (
+                  <Button className='timerBtn' onClick={() => { setTimerOn(false); onPlay(); }} display={pauseBtn}/>
+                )}
+                {!timerOn && time !== 0 && (
+                  <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); onPlay(); }} display={playBtn}/>
+                )}
+                {!timerOn && time > 0 && (
+                  <Button className='timerBtn' onClick={() => { setTime(0); onPlay();}} display={stopBtn}/>
+                )}
+              </div>
+            </main>
+          </div>
         )}
-        {timerOn && (
-          <Button className='timerBtn' onClick={() => setTimerOn(false)} display={pauseBtn}/>
-        )}
-        {!timerOn && time !== 0 && (
-          <Button className='timerBtn' onClick={() => setTimerOn(true)} display={playBtn}/>
-        )}
-        {!timerOn && time > 0 && (
-          <Button className='timerBtn' onClick={() => setTime(0)} display={stopBtn}/>
-        )}
-      </div>
+      />
+
+        <p className="beats">{'\uE083'}</p>
     </div>
   );
 }

@@ -3,6 +3,11 @@
   src: URL('./assets/QuartzMS.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Bravura';
+  src: URL('./assets/Bravura.otf') format('opentype');
+}
+
 .container {
   text-align: center;
 }
@@ -43,4 +48,9 @@
   text-align: center;
   font-size: 25px;
   padding: 2px;
+}
+
+.beats {
+  font-family: Bravura;
+  font-size: 60px;
 }
