@@ -1,12 +1,16 @@
 import './Home.css';
 import Button from './Button';
+import Picker from './Picker';
 import React, {useEffect, useState} from 'react';
+import { FaTimes } from 'react-icons/fa';
 import { BiMenu, BiUpArrow, BiDownArrow } from 'react-icons/bi';
 import { GrPlay, GrPause, GrStop } from 'react-icons/gr';
 
 
 function Home() {
   const [bpmValue, setBpmValue] = useState(100);
+  const [beatsValue, setBeatsValue] = useState(2);
+  const [typeValue, setTypeValue] = useState(4);
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
 
@@ -22,14 +26,22 @@ function Home() {
     }
 
     return () => clearInterval(interval)
-  }, [timerOn])
+  }, [timerOn]) // when timerOn value is changed, useEffect is executed
 
-  const onUpClicked = () => {
-    setBpmValue(bpmValue + 1);
+  const onBpmUpClicked = (threshold) => {
+    if (bpmValue < threshold){
+      setBpmValue(bpmValue + 1)
+    }
   }
 
-  const onDownClicked = () => {
-    setBpmValue(bpmValue - 1);
+  const onBpmDownClicked = (threshold) => {
+    if (bpmValue > threshold){
+      setBpmValue(bpmValue - 1)
+    }
+  }
+
+  const onStartMetronomeClicked = () => {
+    setTimerOn(true);
   }
 
   const upArrow = <BiUpArrow/>;
@@ -42,11 +54,16 @@ function Home() {
     <div className='container'>
       <Button className='greenButton' display='Add'/>
       <Button display='Del'/>
+
+      <div className='beatsRow'>
+        <Picker className='beats' options={[...Array(21).keys()].slice(1)} defaultValue={beatsValue}></Picker>
+        <Picker className='type' options={[1,2,4,8,16,32]} defaultValue={typeValue}></Picker>
+      </div>
       
       <div className='bpmRow'>
-        <Button className='upArrow' onClick={onUpClicked} display={upArrow}/>
+        <Button className='upArrow' onClick={() => onBpmUpClicked(218)} display={upArrow}/>
         <p className='bpm'>{bpmValue}</p>
-        <Button className='downArrow' onClick={onDownClicked} display={downArrow}/>
+        <Button className='downArrow' onClick={() => onBpmDownClicked(40)} display={downArrow}/>
       </div>
 
       <div className='timerRow'>
@@ -57,18 +74,24 @@ function Home() {
 
       <div className='timerControlRow'>
         {!timerOn && time === 0 && (
-          <Button className='timerBtn' onClick={() => setTimerOn(true)} display={playBtn}/>
+          <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); }} display={playBtn}/>
         )}
         {timerOn && (
           <Button className='timerBtn' onClick={() => setTimerOn(false)} display={pauseBtn}/>
         )}
         {!timerOn && time !== 0 && (
-          <Button className='timerBtn' onClick={() => setTimerOn(true)} display={playBtn}/>
+          <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); }} display={playBtn}/>
         )}
         {!timerOn && time > 0 && (
           <Button className='timerBtn' onClick={() => setTime(0)} display={stopBtn}/>
         )}
       </div>
+      <p className='ppp'>{'\uE09E\uE082\uE09F\uE084'}</p>
+
+      <p className='ppp'>{'\uE09E\uE081\uE09E\uE082\uE09F\uE088'}</p>
+
+      <p className='ppp'>{'\uE09E\uE084\uE09F\uE081\uE09F\uE086'}</p>
+
     </div>
   );
 }

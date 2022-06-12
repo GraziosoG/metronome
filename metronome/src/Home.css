@@ -3,8 +3,37 @@
   src: URL('./assets/QuartzMS.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Bravura';
+  src: URL('./assets/Bravura.otf') format('opentype');
+}
+
 .container {
   text-align: center;
+}
+
+.picker-span {
+  display: inline;
+  font-size: 40px;
+  font-family: Bravura;
+}
+
+.beatsRow {
+  margin-top: 20px;
+  position: relative;
+}
+
+.beats {
+  text-align: center;
+}
+
+.type {
+  text-align: center;
+  margin-top: -141px;
+}
+
+.bpmRow {
+  margin-top: -25px;
 }
 
 .bpm {
@@ -32,6 +61,7 @@
 }
 
 .timerRow {
+  margin-top: 25px;
   font-size: 30px;
   font-family: QuartzMS;
 }
@@ -39,8 +69,14 @@
 .timerBtn {
   border: 2px solid gray;
   cursor: pointer;
+  margin-top: 10px;
   margin-left: 10px;
   text-align: center;
   font-size: 25px;
   padding: 2px;
+}
+
+.ppp {
+  font-family: Bravura;
+  font-size: 40px;
 }

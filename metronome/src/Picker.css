@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Bravura';
+    src: URL('./assets/Bravura.otf') format('opentype');
+}
+
+.upArrow {
+    border: 2px solid red;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 30px;
+    padding: 0px;
+}
+  
+.downArrow {
+    border: 2px solid green;
+    cursor: pointer;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 30px;
+    padding: 0px;
+}
