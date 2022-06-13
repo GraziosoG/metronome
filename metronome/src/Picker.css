@@ -20,3 +20,9 @@
     font-size: 30px;
     padding: 0px;
 }
+
+.picker-span {
+    display: inline;
+    font-size: 40px;
+    font-family: Bravura;
+}

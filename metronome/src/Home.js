@@ -73,16 +73,16 @@ function Home() {
       </div>
 
       <div className='timerControlRow'>
-        {!timerOn && time === 0 && (
+        {!timerOn && time === 0 && ( // timer has not started, show only the play button
           <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); }} display={playBtn}/>
         )}
-        {timerOn && (
+        {timerOn && ( // timer has started running, show only the pause button
           <Button className='timerBtn' onClick={() => setTimerOn(false)} display={pauseBtn}/>
         )}
-        {!timerOn && time !== 0 && (
+        {!timerOn && time !== 0 && ( // timer is not running and time is not zero, timer started and paused, show play button, stop button is also shown on the right from the next condition
           <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); }} display={playBtn}/>
         )}
-        {!timerOn && time > 0 && (
+        {!timerOn && time > 0 && ( // timer is not running and time is greater than 0, show stop button, play button is also shown together from the above condition
           <Button className='timerBtn' onClick={() => setTime(0)} display={stopBtn}/>
         )}
       </div>
