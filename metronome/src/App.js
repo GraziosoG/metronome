@@ -3,6 +3,8 @@ import { Outlet, Link } from "react-router-dom";
 const App = () => {
   return (
     <>
+    <div className='menu-button'></div>
+    <div className='menu-invisible'>
       <nav>
         <ul>
           <li>
@@ -16,6 +18,7 @@ const App = () => {
           </li>
         </ul>
       </nav>
+    </div>
 
       <Outlet />
     </>

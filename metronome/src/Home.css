@@ -1,39 +1,76 @@
-.App {
-    text-align: center;
-  }
-  
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
+@font-face {
+  font-family: 'QuartzMS';
+  src: URL('./assets/QuartzMS.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bravura';
+  src: URL('./assets/Bravura.otf') format('opentype');
+}
+
+.container {
+  text-align: center;
+}
+
+.beatsRow {
+  margin-top: 20px;
+  position: relative;
+}
+
+.beats {
+  text-align: center;
+}
+
+.type {
+  text-align: center;
+  margin-top: -141px;
+}
+
+.bpmRow {
+  margin-top: -25px;
+}
+
+.bpm {
+  display: inline;
+  font-size: 30px;
+  font-family: QuartzMS;
+}
+
+.upArrow {
+  border: 2px solid red;
+  cursor: pointer;
+  margin-right: 10px;
+  text-align: center;
+  font-size: 30px;
+  padding: 0px;
+}
+
+.downArrow {
+  border: 2px solid green;
+  cursor: pointer;
+  margin-left: 10px;
+  text-align: center;
+  font-size: 30px;
+  padding: 0px;
+}
+
+.timerRow {
+  margin-top: 25px;
+  font-size: 30px;
+  font-family: QuartzMS;
+}
+
+.timerBtn {
+  border: 2px solid gray;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: center;
+  font-size: 25px;
+  padding: 2px;
+}
+
+.ppp {
+  font-family: Bravura;
+  font-size: 40px;
+}
