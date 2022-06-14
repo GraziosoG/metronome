@@ -3,46 +3,41 @@ import PropTypes from 'prop-types'
 import Button from './Button';
 import React, {useState} from 'react';
 import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
+import {getMusicUnicodes, musicUnicodes} from './utils/GetTimeSignatureNumber';
 
-const Picker = ({ className, options, defaultValue }) => {
-  const musicUnicodes = ['\uE080', '\uE081', '\uE082', '\uE083', '\uE084', '\uE085', '\uE086', '\uE087', '\uE088', '\uE089'];
-  const timeTop = '\uE09E';
-  const timeMiddle = '\uE09F';
-  const [value, setValue] = useState({default: defaultValue, unicode: musicUnicodes[defaultValue]});
+const Picker = ({ className, beatsOptions, typeOptions, defaultBeatsValue, defaultTypeValue, beatsCallback, typeCallback }) => {
+  const [beatsValue, setBeatsValue] = useState({value: defaultBeatsValue, unicode: musicUnicodes[defaultBeatsValue]});
+  const [typeValue, setTypeValue] = useState({value: defaultTypeValue, unicode: musicUnicodes[defaultTypeValue]});
   const upArrow = <BiUpArrow/>;
   const downArrow = <BiDownArrow/>;
 
-  const getMusicUnicodes = (num) => {
-    if (num < 10){
-      return musicUnicodes[num];
-    } else {
-      let strValue = num.toString();
-      let firstNum = parseInt(strValue[0]);
-      let secondNum = parseInt(strValue[1]);
-      return musicUnicodes[firstNum] + musicUnicodes[secondNum];
-    }
+  const onPickerUpClicked = (options, setValue, value, callback) => {
+    let numToShow = options[(options.indexOf(value.value) + 1) % options.length];
+    setValue({value: numToShow, unicode: getMusicUnicodes(numToShow)});
+    callback(numToShow)
   }
 
-  const onPickerUpClicked = () => {
-    let numToShow = options[(options.indexOf(value.default) + 1) % options.length];
-    setValue({default: numToShow, unicode: getMusicUnicodes(numToShow)});
-  }
-
-  const onPickerDownClicked = () => {
-    if (options.indexOf(value.default) === 0){
-      let numToShow = options[options.length - 1]
-      setValue({default: numToShow, unicode: getMusicUnicodes(numToShow)})
+  const onPickerDownClicked = (options, setValue, value, callback) => {
+    let numToShow = 0;
+    if (options.indexOf(value.value) === 0){
+      numToShow = options[options.length - 1]
+      setValue({value: numToShow, unicode: getMusicUnicodes(numToShow)})
     } else {
-      let numToShow = options[(options.indexOf(value.default) - 1) % options.length]
-      setValue({default: numToShow, unicode: getMusicUnicodes(numToShow)})
+      numToShow = options[(options.indexOf(value.value) - 1) % options.length]
+      setValue({value: numToShow, unicode: getMusicUnicodes(numToShow)})
     }
+    callback(numToShow)
   }
 
   return (
     <div className={className}>
-        <Button className='upArrow' onClick={onPickerUpClicked} display={upArrow}/>
-        <span className='picker-span'>{value.unicode}</span>
-        <Button className='downArrow' onClick={onPickerDownClicked} display={downArrow}/>
+        <Button className='upArrow' onClick={() => onPickerUpClicked(beatsOptions, setBeatsValue, beatsValue, beatsCallback)} display={upArrow}/>
+        <span className='picker-span'>{beatsValue.unicode}</span>
+        <Button className='downArrow' onClick={() => onPickerDownClicked(beatsOptions, setBeatsValue, beatsValue, beatsCallback)} display={downArrow}/>
+
+        <Button className='upArrow' onClick={() => onPickerUpClicked(typeOptions, setTypeValue, typeValue, typeCallback)} display={upArrow}/>
+        <span className='picker-span'>{typeValue.unicode}</span>
+        <Button className='downArrow' onClick={() => onPickerDownClicked(typeOptions, setTypeValue, typeValue, typeCallback)} display={downArrow}/>
     </div>
   )
 }
@@ -52,8 +47,11 @@ Picker.defaultProps = {
 
 Picker.propTypes = {
     className: PropTypes.string,
-    options: PropTypes.array,
-    defaultValue: PropTypes.number,
+    beatsOptions: PropTypes.array,
+    typeOptions: PropTypes.array,
+    defaultBeatsValue: PropTypes.number,
+    defaultTypeValue: PropTypes.number,
+    callback: PropTypes.func,
 }
 
 export default Picker

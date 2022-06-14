@@ -2,6 +2,10 @@
   "name": "metronome",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Grace Chiu",
+    "email": "grace.chiu25@utexas.edu"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
