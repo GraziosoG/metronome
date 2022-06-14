@@ -108,7 +108,7 @@ function Home() {
                   <Button className='timerBtn' onClick={() => { onStartMetronomeClicked(); onPlay(); }} display={playBtn}/>
                 )}
                 {!timerOn && time > 0 && ( // timer is not running and time is greater than 0, show stop button, play button is also shown together from the above condition
-                  <Button className='timerBtn' onClick={() => { setTime(0); onPlay();}} display={stopBtn}/>
+                  <Button className='timerBtn' onClick={() => { setTime(0);}} display={stopBtn}/>
                 )}
               </div>
             </main>

@@ -58,10 +58,7 @@ class Metronome extends React.Component {
       )
     }
 
-    this.ticksPerBeat =
-      this.props.beatsPerMeasure % 3 === 0 || this.props.subdivision % 3 === 0
-        ? TICKS_PER_BEAT_TERNARY
-        : TICKS_PER_BEAT_BINARY
+    this.ticksPerBeat = this.ticksPerBeat = this.props.beatsPerMeasure * 4;
     this.timerWorker = new Worker(metronomeWorker)
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)()
     this.nextNoteTime = 0
@@ -94,10 +91,7 @@ class Metronome extends React.Component {
   }
   componentDidUpdate() {
     this.state.beatsPerMeasure = this.props.beatsPerMeasure;
-    this.ticksPerBeat =
-    this.props.beatsPerMeasure % 3 === 0 || this.props.subdivision % 3 === 0
-      ? TICKS_PER_BEAT_TERNARY
-      : TICKS_PER_BEAT_BINARY
+    this.ticksPerBeat = this.props.beatsPerMeasure * 4;
   }
 
   runScheduler = () => {
