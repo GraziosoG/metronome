@@ -92,6 +92,7 @@ class Metronome extends React.Component {
   componentDidUpdate() {
     this.state.beatsPerMeasure = this.props.beatsPerMeasure;
     this.ticksPerBeat = this.props.beatsPerMeasure * 4;
+    this.state.tempo = this.props.tempo;
   }
 
   runScheduler = () => {
