@@ -12,6 +12,24 @@
   text-align: center;
 }
 
+.beatsRow {
+  margin-top: 20px;
+  position: relative;
+}
+
+.beats {
+  text-align: center;
+}
+
+.type {
+  text-align: center;
+  margin-top: -141px;
+}
+
+.bpmRow {
+  margin-top: -25px;
+}
+
 .bpm {
   display: inline;
   font-size: 30px;
@@ -37,6 +55,7 @@
 }
 
 .timerRow {
+  margin-top: 25px;
   font-size: 30px;
   font-family: QuartzMS;
 }
@@ -44,13 +63,14 @@
 .timerBtn {
   border: 2px solid gray;
   cursor: pointer;
+  margin-top: 10px;
   margin-left: 10px;
   text-align: center;
   font-size: 25px;
   padding: 2px;
 }
 
-.beats {
+.ppp {
   font-family: Bravura;
-  font-size: 60px;
+  font-size: 40px;
 }

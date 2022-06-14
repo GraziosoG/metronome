@@ -48,7 +48,10 @@ class Metronome extends React.Component {
 
   constructor(props) {
     super(props)
+    this.init();
+  }
 
+  init() {
     if (this.props.subdivision < 1 || this.props.subdivision > 4) {
       throw new Error(
         `the \`subdivision\` prop must be between 1 and 4.`
@@ -88,6 +91,13 @@ class Metronome extends React.Component {
     this.timerWorker.postMessage({
       action: ACTION_STOP,
     })
+  }
+  componentDidUpdate() {
+    this.state.beatsPerMeasure = this.props.beatsPerMeasure;
+    this.ticksPerBeat =
+    this.props.beatsPerMeasure % 3 === 0 || this.props.subdivision % 3 === 0
+      ? TICKS_PER_BEAT_TERNARY
+      : TICKS_PER_BEAT_BINARY
   }
 
   runScheduler = () => {
