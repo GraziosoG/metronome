@@ -61,19 +61,6 @@ function Home() {
   
   return (
     <div className='container'>
-      <Button className='greenButton' display='Add'/>
-      <Button display='Del'/>
-
-      <div className='beatsRow'>
-        <Picker className='beats-picker' 
-                beatsOptions={[...Array(21).keys()].slice(1)}
-                typeOptions={[1,2,4,8,16,32]} 
-                defaultBeatsValue={beatsValue} 
-                defaultTypeValue={typeValue} 
-                beatsCallback={beatsPickerCallback}
-                typeCallback={typePickerCallback}></Picker>
-      </div>
-      
       <div className='bpmRow'>
         <Button className='upArrow' onClick={() => onBpmUpClicked(218)} display={upArrow}/>
         <p className='bpm'>{bpmValue}</p>
@@ -115,15 +102,15 @@ function Home() {
           </div>
         )}
       />
-
-        <p className="beats">{'\uE083'}</p>
-
-      <p className='ppp'>{'\uE09E\uE082\uE09F\uE084'}</p>
-
-      <p className='ppp'>{'\uE09E\uE081\uE09E\uE082\uE09F\uE088'}</p>
-
-      <p className='ppp'>{'\uE09E\uE084\uE09F\uE081\uE09F\uE086'}</p>
-
+      <div className='beatsRow'>
+        <Picker className='beats-picker' 
+                beatsOptions={[...Array(21).keys()].slice(1)}
+                typeOptions={[1,2,4,8,16,32]} 
+                defaultBeatsValue={beatsValue} 
+                defaultTypeValue={typeValue} 
+                beatsCallback={beatsPickerCallback}
+                typeCallback={typePickerCallback}></Picker>
+      </div>
     </div>
   );
 }

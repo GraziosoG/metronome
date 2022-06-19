@@ -22,7 +22,32 @@
 }
 
 .picker-span {
-    display: inline;
     font-size: 40px;
     font-family: Bravura;
+    display: inline-block;
+}
+
+.timesignature-row {
+    display: flex;
+    cursor: pointer;
+}
+
+.beats-span {
+    width: 100%;
+    margin-top: -20px;
+}
+
+.type-span {
+    width: 100%;
+    margin-left: -100%;
+}
+
+.visible {
+    visibility: visible;
+    display: initial;
+}
+
+.gone {
+    visibility: hidden;
+    display: none;
 }
