@@ -1,6 +1,7 @@
 import './Register.css';
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import { GetFirebaseDb, DBWrite, DBExists } from './utils/FirebaseHelper';
 
 const Register = () => {
     // States for registration
@@ -17,51 +18,80 @@ const Register = () => {
     const handleName = (e) => {
         setName(e.target.value);
         setSubmitted(false);
+        setError(false);
     };
 
-    // Handling the email change
-    const handleEmail = (e) => {
+    const checkEmail = (em) => {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if ( re.test(e.target.value) ) { 
+        if ( !re.test(em) ) { 
+            // invalid email, show an error to the user        
+            setErrMessage('Please enter valid email'); // change error message as long as email format not valid
+            setError(true);  
+            return false;      
+        }
+        else {
             // this is a valid email address            
             setError(false);
             setErrMessage('Please enter all fields'); // make sure return to default error message
         }
-        else {
-            // invalid email, maybe show an error to the user.
-            setError(true);
-            setErrMessage('Please enter valid email'); // change error message as long as email format not valid
-        }
+        return true;
+    }
+
+    // Handling the email change
+    const handleEmail = (e) => {     
         setEmail(e.target.value);
         setSubmitted(false);
+        checkEmail(e.target.value);
     };
 
     // Handling the password change
     const handlePassword = (e) => {
         setPassword(e.target.value);
         setSubmitted(false);
+        setError(false);
     };
 
     // Handling the form submission
     const handleSubmit = (e) => {
         e.preventDefault();        
+        if (checkEmail(email) === false){
+            return;
+        };
         if (name === '' || email === '' || password === '') {
+            setErrMessage('Please enter all fields');
             setError(true);
         } else if (error === true){ // all fields are non-empty but email format not valid
-            setError(true);
-        }else {
-            console.log(name);
-            setSubmitted(true);
-            console.log(name);
-            setError(false);
+            return;
+        } else {  
+            saveUserToDB();
             setName('');
-            console.log(name);
             setEmail('');
             setPassword('');
         }
     };
 
-    // Showing success message
+    const saveUserToDB = () => {
+        const db = GetFirebaseDb();
+        DBExists(db, "users", email).then((doesUserExist) => {
+            if(!doesUserExist) {
+                const user = {
+                    'name': name,
+                    'email': email,
+                    'password': password
+                }
+                DBWrite(db, "users", email, user); // primary key is email, store the whole user info               
+                setSubmitted(true);
+                setError(false);
+                setErrMessage('Please enter all fields');
+            }
+            else {
+                setErrMessage("Email already exists. Create account with another email or log in.")
+                setError(true);
+            }
+        });
+    }
+
+    // Showing success message when submitted === true
     const successMessage = () => {
         return (
         <div

@@ -1,38 +1,42 @@
 import './Login.css';
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import { GetFirebaseDb, DBRead } from './utils/FirebaseHelper';
 
 const Login = () => {
-    // States for registration
-    const [nameMail, setNameMail] = useState('');
+    // States for login
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
 
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+    const [errMessage, setErrMessage] = useState('Please enter all fields.');
 
     // Handling the name change
-    const handleNameMail = (e) => {
-        setNameMail(e.target.value);
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
         setSubmitted(false);
+        setError(false);
     };
 
     // Handling the password change
     const handlePassword = (e) => {
         setPassword(e.target.value);
         setSubmitted(false);
+        setError(false);
     };
 
     // Handling the form submission
     const handleSubmit = (e) => {
-        e.preventDefault();  
-        console.log(nameMail);      
-        if (nameMail === '' || password === '') {
+        e.preventDefault();       
+        if (email === '' || password === '') {
+            setErrMessage('Please enter all fields');
             setError(true);
         } else {
-            setSubmitted(true);
-            setError(false);
-            setNameMail('');
+            LoginUser();
+            setEmail('');
             setPassword('');
         }
     };
@@ -45,7 +49,7 @@ const Login = () => {
             style={{
             display: submitted ? '' : 'none',
             }}>
-            <h3>Welcome back {nameMail}, you are logged in!</h3>
+            <h3>Welcome back {name}, you are logged in!</h3>
         </div>
         );
     };
@@ -58,9 +62,30 @@ const Login = () => {
             style={{
             display: error ? '' : 'none',
             }}>
-            <h3>Please enter all fields</h3>
+            <h3>{errMessage}</h3>
         </div>
         );
+    };
+
+    const LoginUser = () => {
+        const db = GetFirebaseDb();
+        DBRead(db, "users", email).then((data) => {
+            if (data === null){
+                setErrMessage('Account not yet created');
+                setError(true);
+            } else {
+                if(password === data.password) { // password matches, go back to default error msg
+                    setName(data.name);
+                    setSubmitted(true);
+                    setError(false);
+                    setErrMessage('Please enter all fields');
+                }
+                else {                    
+                    setErrMessage('Wrong password, please try again');
+                    setError(true);
+                }
+            };
+        })       
     };
 
     return (
@@ -71,9 +96,9 @@ const Login = () => {
 
             <form>
                 {/* Labels and inputs for form data */}
-                <label className="label">Username or Email</label>
-                <input onChange={handleNameMail} className="input"
-                value={nameMail} type="text" />
+                <label className="label">Email</label>
+                <input onChange={handleEmail} className="input"
+                value={email} type="email" />
 
                 <label className="label">Password</label>
                 <input onChange={handlePassword} className="input"

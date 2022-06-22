@@ -17,7 +17,7 @@
 /* opened up menu*/
 .nav-menu {
   background-color: white;
-  width: 220px;
+  width: 250px;
   height: 100vh; /*viewport height, show all the way*/
   display: flex;
   justify-content: center;
