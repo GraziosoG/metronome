@@ -40,7 +40,7 @@
 	US31- (2)- Registration
 	US32- (2)- Login
 ### General F9: 3 hours
-	US3- (3) Menu and Menu Button
+	US33- (3) Menu and Menu Button
 
 ## Sprint Progress
 ### Sprint 1 (6/6/22 - 6/13/22):
