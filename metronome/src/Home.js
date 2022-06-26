@@ -116,14 +116,6 @@ function Home() {
         )}
       />
 
-        <p className="beats">{'\uE083'}</p>
-
-      <p className='ppp'>{'\uE09E\uE082\uE09F\uE084'}</p>
-
-      <p className='ppp'>{'\uE09E\uE081\uE09E\uE082\uE09F\uE088'}</p>
-
-      <p className='ppp'>{'\uE09E\uE084\uE09F\uE081\uE09F\uE086'}</p>
-
     </div>
   );
 }

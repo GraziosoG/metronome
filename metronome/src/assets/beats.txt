@@ -26,3 +26,5 @@
 
 40-218
 1-20
+
+export const musicUnicodes = ['\uE1D2', '\uE1D3', '\uE1D5', '\uE1D7', '\uE1D9', '\uE1DB', '\uE050'];
