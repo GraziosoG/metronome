@@ -1,27 +1,30 @@
-import { Outlet, Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Menu from './Menu';
+import Home from './Home';
+import Settings from './Settings';
+import Login from './Login';
+import Register from './Register';
+import UserContext from "./UserContext";
 
 const App = () => {
-  return (
-    <>
-    <div className='menu-button'></div>
-    <div className='menu-invisible'>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/settings">Settings</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  const [username, setUsername] = useState('');
+  const updateUserContext = (un) => {
+    setUsername(un);
+  };
 
-      <Outlet />
-    </>
+  return (
+    <UserContext.Provider value={{username: username, updateUserContext: updateUserContext}}>  
+      <BrowserRouter>
+      <Menu />
+        <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/settings" element={<Settings/>}/>
+            <Route exact path="/login" element={<Login/>}/>
+            <Route exact path="/register" element={<Register/>}/>
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   )
 };
 

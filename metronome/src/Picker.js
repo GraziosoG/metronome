@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import Button from './Button';
 import React, {useState} from 'react';
 import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
-import {getMusicUnicodes, musicUnicodes} from './utils/GetTimeSignatureNumber';
+import {getMusicUnicodes} from './utils/GetTimeSignatureNumber';
 
 const Picker = ({ className, beatsOptions, typeOptions, defaultBeatsValue, defaultTypeValue, beatsCallback, typeCallback }) => {
-  const [beatsValue, setBeatsValue] = useState({value: defaultBeatsValue, unicode: musicUnicodes[defaultBeatsValue]});
-  const [typeValue, setTypeValue] = useState({value: defaultTypeValue, unicode: musicUnicodes[defaultTypeValue]});
+  
+  const [beatsValue, setBeatsValue] = useState({value: defaultBeatsValue, unicode: getMusicUnicodes(defaultBeatsValue)});
+  const [typeValue, setTypeValue] = useState({value: defaultTypeValue, unicode: getMusicUnicodes(defaultTypeValue)});
   const upArrow = <BiUpArrow/>;
   const downArrow = <BiDownArrow/>;
   const [isOpen, setIsOpen] = useState(false);

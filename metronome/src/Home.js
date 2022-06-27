@@ -1,11 +1,12 @@
 import './Home.css';
 import Button from './Button';
 import Picker from './Picker';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
 import { GrPlay, GrPause, GrStop } from 'react-icons/gr';
 import Metronome from '../src/components/metronome-component';
+import UserContext from './UserContext';
 
 function Home() {
   const [bpmValue, setBpmValue] = useState(100);
@@ -13,6 +14,8 @@ function Home() {
   const [typeValue, setTypeValue] = useState(4);
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
+
+  const userContext = useContext(UserContext);
 
   useEffect(() => {
     let interval = null;
@@ -61,6 +64,7 @@ function Home() {
   
   return (
     <div className='container'>
+      <p>{userContext.username}</p>
       <div className='bpmRow'>
         <Button className='upArrow' onClick={() => onBpmUpClicked(218)} display={upArrow}/>
         <p className='bpm'>{bpmValue}</p>
