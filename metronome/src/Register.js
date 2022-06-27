@@ -1,7 +1,8 @@
 import './Register.css';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from "react-router-dom";
 import { GetFirebaseDb, DBWrite, DBExists } from './utils/FirebaseHelper';
+import UserContext from './UserContext';
 
 const Register = () => {
     // States for registration
@@ -13,6 +14,7 @@ const Register = () => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [errMessage, setErrMessage] = useState('Please enter all fields');
+    const userContext = useContext(UserContext);
 
     // Handling the name change
     const handleName = (e) => {
@@ -82,6 +84,7 @@ const Register = () => {
                 DBWrite(db, "users", email, user); // primary key is email, store the whole user info               
                 setSubmitted(true);
                 setError(false);
+                userContext.updateUserContext(email)
                 setErrMessage('Please enter all fields');
             }
             else {

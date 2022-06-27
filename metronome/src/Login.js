@@ -1,7 +1,8 @@
 import './Login.css';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from "react-router-dom";
 import { GetFirebaseDb, DBRead } from './utils/FirebaseHelper';
+import UserContext from './UserContext';
 
 const Login = () => {
     // States for login
@@ -13,6 +14,7 @@ const Login = () => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [errMessage, setErrMessage] = useState('Please enter all fields.');
+    const userContext = useContext(UserContext);
 
     // Handling the name change
     const handleEmail = (e) => {
@@ -77,6 +79,7 @@ const Login = () => {
                 if(password === data.password) { // password matches, go back to default error msg
                     setName(data.name);
                     setSubmitted(true);
+                    userContext.updateUserContext(email)
                     setError(false);
                     setErrMessage('Please enter all fields');
                 }

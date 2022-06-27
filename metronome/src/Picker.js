@@ -11,6 +11,7 @@ const Picker = ({ className, beatsOptions, typeOptions, defaultBeatsValue, defau
   const [typeValue, setTypeValue] = useState({value: defaultTypeValue, unicode: getMusicUnicodes(defaultTypeValue)});
   const upArrow = <BiUpArrow/>;
   const downArrow = <BiDownArrow/>;
+  const [isOpen, setIsOpen] = useState(false);
 
   const onPickerUpClicked = (options, setValue, value, callback) => {
     let numToShow = options[(options.indexOf(value.value) + 1) % options.length];
@@ -29,16 +30,27 @@ const Picker = ({ className, beatsOptions, typeOptions, defaultBeatsValue, defau
     }
     callback(numToShow)
   }
+  
+  const onPickerChangeClicked = () => {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div className={className}>
-        <Button className='upArrow' onClick={() => onPickerUpClicked(beatsOptions, setBeatsValue, beatsValue, beatsCallback)} display={upArrow}/>
-        <span className='picker-span'>{beatsValue.unicode}</span>
-        <Button className='downArrow' onClick={() => onPickerDownClicked(beatsOptions, setBeatsValue, beatsValue, beatsCallback)} display={downArrow}/>
-
-        <Button className='upArrow' onClick={() => onPickerUpClicked(typeOptions, setTypeValue, typeValue, typeCallback)} display={upArrow}/>
-        <span className='picker-span'>{typeValue.unicode}</span>
-        <Button className='downArrow' onClick={() => onPickerDownClicked(typeOptions, setTypeValue, typeValue, typeCallback)} display={downArrow}/>
+      <div className="picker-container">
+        <div className={isOpen ? 'visible' : 'gone' + " beats-picker"}>
+          <Button className='upArrow' onClick={() => onPickerUpClicked(beatsOptions, setBeatsValue, beatsValue, beatsCallback)} display={upArrow}/>
+          <Button className='downArrow' onClick={() => onPickerDownClicked(beatsOptions, setBeatsValue, beatsValue, beatsCallback)} display={downArrow}/>
+        </div>
+        <div className="timesignature-row" onClick={onPickerChangeClicked}>
+          <span className='picker-span beats-span' >{beatsValue.unicode}</span>
+          <span className='picker-span type-span'>{typeValue.unicode}</span>
+        </div>
+        <div className={isOpen ? 'visible' : 'gone' + " type-picker"}>
+          <Button className='upArrow' onClick={() => onPickerUpClicked(typeOptions, setTypeValue, typeValue, typeCallback)} display={upArrow}/>
+          <Button className='downArrow' onClick={() => onPickerDownClicked(typeOptions, setTypeValue, typeValue, typeCallback)} display={downArrow}/>
+        </div>
+      </div>
     </div>
   )
 }
